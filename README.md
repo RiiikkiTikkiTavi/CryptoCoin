@@ -18,3 +18,7 @@ samples, guidance on mobile development, and a full API reference.
 
 Работа с темой
 Добавление asset'ов
+Архитектура папок приложения, правила красивого хранения файлов
+Получение запросов API https://min-api.cryptocompare.com
+Создание модели получаемых данных 
+Вывод данных
