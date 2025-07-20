@@ -1,8 +1,10 @@
 import 'package:crypto_coins/models/crypto_coin.dart';
+import 'package:crypto_coins/repositories/crypto_coins/abstract_coins_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
-class CryproCoinsRepository {
+class CryproCoinsRepository implements AbstractCoinsRepository {
+  @override
   Future<List<CryptoCoin>> getCoinsList() async {
     // экземпляр Dio - клиент для взаимодействия с сетью
     // метод get - запрос данных по url

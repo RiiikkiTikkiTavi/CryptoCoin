@@ -21,7 +21,7 @@ class _CryptoListScreenState extends State<CryptoListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context); // обращение к общей теме
+    //final theme = Theme.of(context); // обращение к общей теме
     return Scaffold(
       appBar: AppBar(title: const Text('Crypto Currencies List')),
       body: (_cryptoCoinsList == null)
