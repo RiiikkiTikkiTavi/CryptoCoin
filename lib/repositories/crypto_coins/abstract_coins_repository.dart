@@ -1,4 +1,6 @@
-import 'package:crypto_coins/models/crypto_coin.dart';
+// интерфейс, определяещий правила для CoinsRepository
+
+import 'package:crypto_coins/repositories/crypto_coins/models/crypto_coin.dart';
 
 abstract class AbstractCoinsRepository {
   Future<List<CryptoCoin>> getCoinsList();
