@@ -10,6 +10,11 @@ void main() {
   // GetIt.instance.registerSingleton(CryproCoinsRepository(dio: Dio()));
 
   // LazySingleton создает объект при первом его упоминании
-  GetIt.I.registerLazySingleton(() => CryproCoinsRepository(dio: Dio()));
+  // GetIt.I.registerLazySingleton(() => CryproCoinsRepository(dio: Dio()));
+
+  // регистрация LazySingleton по типу AbstractCoinsRepository с реализацией CryproCoinsRepository
+  GetIt.I.registerLazySingleton<AbstractCoinsRepository>(
+    () => CryproCoinsRepository(dio: Dio()),
+  );
   runApp(const CryptoCurrenciesListApp());
 }
