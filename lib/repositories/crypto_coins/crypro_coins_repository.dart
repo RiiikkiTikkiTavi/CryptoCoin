@@ -30,7 +30,7 @@ class CryproCoinsRepository implements AbstractCoinsRepository {
       return CryptoCoin(
         name: e.key,
         priceInUSD: price,
-        imageUrl: 'https://www.cryptocompare.com/' + imageUrl,
+        imageUrl: 'https://www.cryptocompare.com/$imageUrl',
       );
     }).toList();
     return cryptoCOinList;
@@ -56,9 +56,9 @@ class CryproCoinsRepository implements AbstractCoinsRepository {
     return CryptoCoinDetail(
       name: currencyCode,
       priceInUSD: price,
-      imageUrl: imageUrl,
+      imageUrl: 'https://www.cryptocompare.com/$imageUrl',
       toSymbol: toSymbol,
-      lastUpdate: lastUpdate,
+      lastUpdate: DateTime.fromMillisecondsSinceEpoch(lastUpdate),
       high24Hour: high24Hour,
       low24Hour: low24Hour,
     );

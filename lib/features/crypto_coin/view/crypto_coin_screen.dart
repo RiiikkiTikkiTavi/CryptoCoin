@@ -22,20 +22,21 @@ class _CryptoCoinScreenState extends State<CryptoCoinScreen> {
   @override
   void didChangeDependencies() {
     final args = ModalRoute.of(context)?.settings.arguments;
-    // if (args == null) {
-    //   log('You must provide args');
-    //   return;
-    // }
-    // if (args is! String) {
-    //   log('You must provide String arg');
-    //   return;
-    // }
-    assert(args != null && args is! CryptoCoin, 'You must provide String args');
-    coin = args as CryptoCoin;
-    _coinDetailsBloc.add(LoadCryptoCoinDetails(currencyCode: coin!.name));
-    // вызов ошибки при невыполнении условий
+    if (args == null) {
+      print('You must provide args');
+      return;
+    }
+    if (args is! CryptoCoin) {
+      print('You must provide String arg');
+      return;
+    }
+    // assert(
+    //   args == null && args is! CryptoCoin,
+    //   'You must provide String args',
+    // ); // вызов ошибки при невыполнении условий
     coin = args;
     _coinDetailsBloc.add(LoadCryptoCoinDetails(currencyCode: coin!.name));
+
     super.didChangeDependencies();
   }
 
