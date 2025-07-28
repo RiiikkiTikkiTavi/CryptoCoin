@@ -13,7 +13,7 @@ class CryptoCurrenciesListApp extends StatelessWidget {
       title: 'CryptoCurrenciesList',
       theme: darkTheme,
       routes: routes,
-      // следит за тем, какие страницы открывабтся
+      // следит за тем, какие страницы открываются
       navigatorObservers: [
         // передаем инстанс толкера
         TalkerRouteObserver(GetIt.I<Talker>()),
