@@ -4,6 +4,7 @@ import 'package:crypto_coins/repositories/crypto_coins/crypto_coins.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:talker_flutter/talker_flutter.dart';
 
 class CryptoCoinScreen extends StatefulWidget {
   const CryptoCoinScreen({super.key});
@@ -23,11 +24,11 @@ class _CryptoCoinScreenState extends State<CryptoCoinScreen> {
   void didChangeDependencies() {
     final args = ModalRoute.of(context)?.settings.arguments;
     if (args == null) {
-      print('You must provide args');
+      GetIt.I<Talker>().debug('You must provide args');
       return;
     }
     if (args is! CryptoCoin) {
-      print('You must provide String arg');
+      GetIt.I<Talker>().debug('You must provide String arg');
       return;
     }
     // assert(
@@ -49,7 +50,8 @@ class _CryptoCoinScreenState extends State<CryptoCoinScreen> {
         bloc: _coinDetailsBloc,
         builder: (context, state) {
           if (state is CryptoCoinDetailsLoaded) {
-            final coinDetails = state.coinDetails;
+            final coin = state.coin;
+            final coinDetails = coin.details;
             return Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -57,11 +59,11 @@ class _CryptoCoinScreenState extends State<CryptoCoinScreen> {
                   SizedBox(
                     height: 160,
                     width: 160,
-                    child: Image.network(coinDetails.imageUrl),
+                    child: Image.network(coinDetails.fullImageUrl),
                   ),
                   const SizedBox(height: 24),
                   Text(
-                    coinDetails.name,
+                    coin.name,
                     style: const TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.w700,
