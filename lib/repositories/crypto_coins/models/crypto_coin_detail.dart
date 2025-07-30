@@ -1,22 +1,18 @@
 import 'package:equatable/equatable.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'crypto_coin_detail.g.dart'; // g- генерируемый файл
 
-// сообщает, что нужно сгенерировать ддо
+@HiveType(typeId: 1)
+// сообщает, что нужно сгенерировать dto (data transfer object)
 @JsonSerializable()
 class CryptoCoinDetail extends Equatable {
-  @JsonKey(name: 'PRICE') // как поле выглядит в приходящем запросе
-  final double priceInUSD;
-
-  @JsonKey(name: 'IMAGEURL')
-  final String imageUrl;
-
-  String get fullImageUrl => 'https://www.cryptocompare.com/$imageUrl';
-
+  @HiveField(0)
   @JsonKey(name: 'TOSYMBOL')
   final String toSymbol;
 
+  @HiveField(1)
   @JsonKey(
     name: 'LASTUPDATE',
     toJson: _dateTimeToJson,
@@ -24,11 +20,23 @@ class CryptoCoinDetail extends Equatable {
   )
   final DateTime lastUpdate;
 
+  @HiveField(2)
   @JsonKey(name: 'HIGH24HOUR')
   final double high24Hour;
 
+  @HiveField(3)
   @JsonKey(name: 'LOW24HOUR')
   final double low24Hour;
+
+  @HiveField(4)
+  @JsonKey(name: 'PRICE') // как поле выглядит в приходящем запросе
+  final double priceInUSD;
+
+  @HiveField(5)
+  @JsonKey(name: 'IMAGEURL')
+  final String imageUrl;
+
+  String get fullImageUrl => 'https://www.cryptocompare.com/$imageUrl';
 
   const CryptoCoinDetail({
     required this.priceInUSD,

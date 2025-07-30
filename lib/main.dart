@@ -7,6 +7,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:talker_bloc_logger/talker_bloc_logger.dart';
 import 'package:talker_dio_logger/talker_dio_logger_interceptor.dart';
 import 'package:talker_dio_logger/talker_dio_logger_settings.dart';
@@ -21,6 +22,17 @@ void main() async {
   GetIt.I.registerSingleton(talker);
 
   GetIt.I<Talker>().debug('Talker started');
+
+  // имя бокса
+  const cryptoCoinsBoxName = 'crypro_coins_box';
+  // инициализация Hive
+  await Hive.initFlutter();
+  // говорим Hive, с какими адаптерами нужно работать
+  Hive.registerAdapter(CryptoCoinAdapter());
+  Hive.registerAdapter(CryptoCoinDetailAdapter());
+
+  // открываем box c типом CryptoCoin
+  final cryptoCoinsBox = await Hive.openBox<CryptoCoin>(cryptoCoinsBoxName);
 
   final app = await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -53,7 +65,7 @@ void main() async {
 
   // регистрация LazySingleton по типу AbstractCoinsRepository с реализацией CryproCoinsRepository
   GetIt.I.registerLazySingleton<AbstractCoinsRepository>(
-    () => CryproCoinsRepository(dio: dio),
+    () => CryproCoinsRepository(dio: dio, cryptoCoinBox: cryptoCoinsBox),
   );
 
   // обработка ошибок интерфейса
