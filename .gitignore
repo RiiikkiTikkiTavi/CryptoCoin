@@ -24,6 +24,11 @@ migrate_working_dir/
 #.vscode/
 
 # Flutter/Dart/Pub related
+# Автогенерируемые файлы build_runner
+*.g.dart
+*.freezed.dart
+*.config.dart
+*.mocks.dart
 **/doc/api/
 **/ios/Flutter/.last_build_id
 .dart_tool/
